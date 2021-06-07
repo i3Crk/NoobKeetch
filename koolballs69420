@@ -90,7 +90,7 @@ Folder.Button("Reset Settings", "Run", function()
 	game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
 end)
 
-local Tab3 = Window.Tab("Your Bizarre Adventure", 6924156010)
+local Tab3 = Window.Tab("Your Bizarre Adventure", 6924156005)
 
 local farmingfolder = Tab3.Folder("Farming", "Farming scripts")
 farmingfolder.Button("Item ESP", "Run", function()
