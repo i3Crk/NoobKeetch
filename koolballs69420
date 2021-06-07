@@ -1,0 +1,188 @@
+local Luminosity = loadstring(game:HttpGet("https://raw.githubusercontent.com/iHavoc101/Genesis-Studios/main/UserInterface/Luminosity.lua", true))()
+
+local Window = Luminosity.new("Noobkeetch", "v1.0.0", 4370345701)
+
+--//Variables
+local speed = false
+local jump = false
+local uikeybind = "F"
+local Items = {
+	["Gold Coin"] = false,
+	["Diamond"] = false,
+	["Mysterious Arrow"] = false,
+	["Stand Arrow"] = false,
+	["Rokakaka"] = false,
+	["Pure Rokakaka"] = false,
+	["DEO's Diary"] = false,
+	["Steel Ball"] = false,
+	["Ancient Scroll"] = false,
+	["Quinton's Glove"] = false,
+	["Stone Mask"] = false,
+	["Rib Cage of The Saint's Corpse"] = false,
+	["Heart of The Saint's Corpse"] = false,
+	["Pelvis of The Saint's Corpse"] = false,
+	["Left Arm of The Saint's Corpse"] = false,
+	["Redeemed Rokakaka"] = false,
+	["Redeemed Mysterious Arrow"] = false,
+	["Lucky Arrow"] = false
+}
+
+local Tab1 = Window.Tab("Main", 6026568198)
+local Folder = Tab1.Folder("Script Hubs", "A bunch of script hubs checked every week.")
+
+--//Script Hubs
+Folder.Button("Funky Friday Autoplayer", "Run", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/wally-rblx/funky-friday-autoplay/main/main.lua",true))()
+end)
+Folder.Button("Owl Hub [FPS]", "Run", function()
+	loadstring(game:HttpGet("https://pastebin.com/raw/GtudyLtE"))();
+end)
+
+--//Other
+local Other = Tab1.Folder("Other", "Things that don't really fit in a category.")
+Other.TextBox("Open/Close Keybind", "Placeholder", function(Text)
+	uikeybind = string.upper(Text)
+end)
+
+local Tab2 = Window.Tab("Player", 6022668945)
+local Folder = Tab2.Folder("Humanoid", "Affects your humanoid.")
+
+Folder.Toggle("Speed Toggle", function(Status)
+	if Status == true then
+		speed = true
+	elseif Status == false then
+		speed = false
+		if game.Players.LocalPlayer.Character.Humanoid.WalkSpeed ~= 16 then
+			game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+		end
+	end
+end)
+
+Folder.Slider("Speed", {Precise = true, Default = 16, Min = 16, Max = 250}, function(Status)
+	while speed == true do
+		game:GetService("RunService").RenderStepped:wait()
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Status
+	end
+end)
+
+Folder.Toggle("Jump Toggle", function(Status)
+	if Status == true then
+		jump = true
+	elseif Status == false then
+		jump = false
+		if game.Players.LocalPlayer.Character.Humanoid.JumpPower ~= 50 then
+			game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+		end
+	end
+end)
+
+Folder.Slider("Jump Power", {Precise = true, Default = 50, Min = 50, Max = 500}, function(Status)
+	while jump == true do
+		game:GetService("RunService").RenderStepped:wait()
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = Status
+	end
+end)
+
+Folder.Button("Reset Settings", "Run", function()
+	jump = false
+	speed = false
+	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+	game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+end)
+
+local Tab3 = Window.Tab("Your Bizarre Adventure", 6924156010)
+
+local farmingfolder = Tab3.Folder("Farming", "Farming scripts")
+farmingfolder.Button("Item ESP", "Run", function()
+	if not pcall(function() return syn.protect_gui end) then
+		syn = {}
+		syn.protect_gui = function(egg)
+			egg.Parent = game.CoreGui
+		end
+	end
+	loadstring(game:HttpGet("https://gist.githubusercontent.com/Chrrxs/d2dfdcde75c2d11b173aa664c0a6b755/raw", true))()
+end)
+
+farmingfolder.Button("Level Autofarm", "Run", function()
+	loadstring(game:HttpGet('https://gist.githubusercontent.com/stellar-4242/090eac215b54e6520097aea444b9f530/raw/48e54416196937bae43e16036e1b59882d6f736c/autofarm.lua'))()
+end)
+
+farmingfolder.Button("Roll Arcade", "Run", function()
+	local args = {
+		[1] = "EndDialogue",
+		[2] = {
+			["NPC"] = "Item Machine",
+			["Option"] = "Option1",
+			["Dialogue"] = "Dialogue1"
+		}
+	}
+	game:GetService("Players").LocalPlayer.Character.RemoteEvent:FireServer(unpack(args))
+end)
+
+local sellfolder = Tab3.Folder("Sell", "Sell stuff from anywhere.")
+sellfolder.Button("Sell All", "Run", function()
+	for item, bool in pairs(Items) do
+		if Items[item] == true then
+			if game.Players.LocalPlayer.Backpack[item] then
+				game.Players.LocalPlayer.Backpack[item].Parent = game.Players.LocalPlayer.Character
+				local args = {
+					[1] = "EndDialogue",
+					[2] = {
+						["NPC"] = "Merchant",
+						["Option"] = "Option2",
+						["Dialogue"] = "Dialogue5"
+					}
+				}
+				game:GetService("Players").LocalPlayer.Character.RemoteEvent:FireServer(unpack(args))
+			end
+		end
+	end
+end)
+
+sellfolder.Button("Sell One", "Run", function()
+	for item, bool in pairs(Items) do
+		if Items[item] == true then
+			if game.Players.LocalPlayer.Backpack[item] then
+				game.Players.LocalPlayer.Backpack[item].Parent = game.Players.LocalPlayer.Character
+				local args = {
+					[1] = "EndDialogue",
+					[2] = {
+						["NPC"] = "Merchant",
+						["Option"] = "Option1",
+						["Dialogue"] = "Dialogue5"
+					}
+				}
+				game:GetService("Players").LocalPlayer.Character.RemoteEvent:FireServer(unpack(args))
+			end
+		end
+	end
+end)
+
+for item, bool in pairs(Items) do
+	sellfolder.Toggle(item, function(Status)
+		if Status == true then
+			Items[item] = true
+		elseif Status == false then
+			Items[item] = false
+		end
+	end)
+end
+
+local generalcheats = Tab3.Folder("General Cheats", "Main stuff.")
+
+generalcheats.Button("No Endlag", "Run", function()
+	while true do
+		game:GetService("Players").LocalPlayer.Character.RemoteEvent:FireServer("EndDialogue", {
+			["Option"] = "Option1",
+			["Dialogue"] = "Dialogue2",
+			["NPC"] = "Prestige"
+		})
+		wait()
+	end
+end)
+
+game:GetService("UserInputService").InputBegan:Connect(function(Input)
+	if Input.KeyCode == Enum.KeyCode[uikeybind] then
+		Window:Toggle()
+	end
+end)
