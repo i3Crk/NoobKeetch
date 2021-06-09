@@ -26,6 +26,7 @@ local Items = {
 	["Redeemed Mysterious Arrow"] = false,
 	["Lucky Arrow"] = false
 }
+local aianotifs = false
 
 local Tab1 = Window.Tab("Main", 6026568198)
 local Folder = Tab1.Folder("Script Hubs", "A bunch of script hubs checked every week.")
@@ -178,6 +179,44 @@ generalcheats.Button("No Endlag", "Run", function()
 			["NPC"] = "Prestige"
 		})
 		wait()
+	end
+end)
+
+local Tab4 = Window.Tab("An Infinite Adventure", 6924156005)
+
+local itemautofarm = Tab4.Cheat("Item Autofarm", "like 1 setting for this ig lol!", function(Status)
+	while Status == true do
+	workspace.ChildAdded:Connect(function(child)
+		if child:IsA('Tool') then
+			local tn = child.Name
+			local a = Instance.new('CFrameValue',game.Players.LocalPlayer.Character)
+			a.Name = "hi koolkid uwu"
+			a.Value = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+			wait(.05)
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = child.Handle.CFrame
+			if aianotifs == true then
+			local StarterGui = game:GetService("StarterGui")
+
+			local Notification = 'Picked up ' .. tn
+
+			StarterGui:SetCore("SendNotification", {
+				Title = "Item Autofarm",
+				Text = Notification,
+				Duration = 2.5
+			})
+			end
+			wait(.05)
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = a.Value
+		end
+		end)
+	end
+end)
+
+itemautofarm.Toggle("Item Notifications", function(Status)
+	if Status == true then
+		aianotifs = true
+	elseif Status == false then
+		aianotifs = false
 	end
 end)
 
