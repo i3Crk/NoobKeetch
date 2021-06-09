@@ -5,7 +5,7 @@ local Window = Luminosity.new("Noobkeetch", "v1.0.2", 4370345701)
 --//Variables
 local speed = false
 local jump = false
-local uikeybind = "F"
+local uikeybind = "L"
 local Items = {
 	["Gold Coin"] = false,
 	["Diamond"] = false,
