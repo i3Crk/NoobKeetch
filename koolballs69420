@@ -236,6 +236,7 @@ itemautofarm.Toggle("Safe Place", function(Status)
 			pogwater.Color = Color3.new(255,0,0)
 			pogwater.Material = Enum.Material.Neon
 			pogwater.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame*CFrame.new(0,694.20,0)
+			pogwater.Size = Vector3.new(12,1,12)
 		end
 	elseif Status == false then
 		safeplace = false
