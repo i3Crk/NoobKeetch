@@ -1,11 +1,11 @@
 local Luminosity = loadstring(game:HttpGet("https://raw.githubusercontent.com/iHavoc101/Genesis-Studios/main/UserInterface/Luminosity.lua", true))()
 
-local Window = Luminosity.new("Noobkeetch", "v1.0.2", 4370345701)
+local Window = Luminosity.new("Noobkeetch", "v1.0.3", 4370345701)
 
 --//Variables
 local speed = false
 local jump = false
-local uikeybind = "L"
+local uikeybind = "F"
 local Items = {
 	["Gold Coin"] = false,
 	["Diamond"] = false,
@@ -27,6 +27,7 @@ local Items = {
 	["Lucky Arrow"] = false
 }
 local aianotifs = false
+local safeplace = false
 
 local Tab1 = Window.Tab("Main", 6026568198)
 local Folder = Tab1.Folder("Script Hubs", "A bunch of script hubs checked every week.")
@@ -185,8 +186,8 @@ end)
 local Tab4 = Window.Tab("An Infinite Adventure", 6924156005)
 
 local itemautofarm = Tab4.Cheat("Item Autofarm", "like 1 setting for this ig lol!", function(Status)
-	while Status == true do
 	workspace.ChildAdded:Connect(function(child)
+		if Status == true then
 		if child:IsA('Tool') then
 			local tn = child.Name
 			local a = Instance.new('CFrameValue',game.Players.LocalPlayer.Character)
@@ -205,11 +206,15 @@ local itemautofarm = Tab4.Cheat("Item Autofarm", "like 1 setting for this ig lol
 				Duration = 2.5
 			})
 			end
-			wait(.05)
-			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = a.Value
+				wait(.05)
+				if safeplace == true then
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace:FindFirstChild("autofarmsafeplace").CFrame*CFrame.new(0,2,0)
+				elseif safeplace == false then
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = a.Value
+				end
+			end
 		end
-		end)
-	end
+	end)
 end)
 
 itemautofarm.Toggle("Item Notifications", function(Status)
@@ -217,6 +222,23 @@ itemautofarm.Toggle("Item Notifications", function(Status)
 		aianotifs = true
 	elseif Status == false then
 		aianotifs = false
+	end
+end)
+
+itemautofarm.Toggle("Safe Place", function(Status)
+	if Status == true then
+		safeplace = true
+		if not workspace:FindFirstChild("autofarmsafeplace") then
+			local pogwater = Instance.new("Part", workspace)
+			pogwater.Name = "autofarmsafeplace"
+			pogwater.Anchored = true
+			pogwater.Transparency = 0.5
+			pogwater.Color = Color3.new(255,0,0)
+			pogwater.Material = Enum.Material.Neon
+			pogwater.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame*CFrame.new(0,694.20,0)
+		end
+	elseif Status == false then
+		safeplace = false
 	end
 end)
 
