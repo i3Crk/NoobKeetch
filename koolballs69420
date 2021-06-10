@@ -196,6 +196,14 @@ Hook = hookfunction(getrawmetatable(game).__namecall, newcclosure(function(self,
 	end
 	return Hook(self, ...)
 end))
+local TPBypass
+TPBypass = hookfunction(getrawmetatable(game).__namecall, newcclosure(function(self, ...)
+	local args = {...}
+	if self.Name == "Returner" and args[1] == "idklolbrah2de"  then
+		return "  ___XP DE KEY"
+	end
+	return TPBypass(self, ...)
+end))
 
 generalcheats.Button("God Mode", "Run", function()
 	while game.Players.LocalPlayer.Character.Humanoid.Health ~= 0 do wait(1) pcall(function()
@@ -208,12 +216,15 @@ end)
 generalcheats.Button("Invisibility", "Run", function()
 	if game.Players.LocalPlayer.Character.Humanoid.Health ~= 0 then
 		if game.Players.LocalPlayer.Character.Humanoid.Health == 0 then return end
+		local lastpos = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.p
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.p = Vector3.new(1772.76,771.489,147.862)
 		if game:GetService("Players").LocalPlayer.Character.LowerTorso:FindFirstChild'Root' then
 			game:GetService("Players").LocalPlayer.Character.LowerTorso.Root:Remove()
 		end
 		if game:GetService("Players").LocalPlayer.Character.UpperTorso:FindFirstChild'Waist' then
 			game:GetService("Players").LocalPlayer.Character.UpperTorso.Waist:Remove()
 		end
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.p = lastpos
 	end
 end)
 
