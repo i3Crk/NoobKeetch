@@ -217,6 +217,7 @@ generalcheats.Button("Invisibility", "Run", function()
 	if game.Players.LocalPlayer.Character.Humanoid.Health ~= 0 then
 		if game.Players.LocalPlayer.Character.Humanoid.Health == 0 then return end
 		local lastpos = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.p
+		wait()
 		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.p = Vector3.new(1772.76,771.489,147.862)
 		if game:GetService("Players").LocalPlayer.Character.LowerTorso:FindFirstChild'Root' then
 			game:GetService("Players").LocalPlayer.Character.LowerTorso.Root:Remove()
