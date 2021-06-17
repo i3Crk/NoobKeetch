@@ -1,6 +1,6 @@
 local Luminosity = loadstring(game:HttpGet("https://raw.githubusercontent.com/iHavoc101/Genesis-Studios/main/UserInterface/Luminosity.lua", true))()
 
-local Window = Luminosity.new("Noobkeetch", "v1.0.4", 4370345701)
+local Window = Luminosity.new("Noobkeetch", "v1.0.5", 4370345701)
 
 --//Variables
 local speed = false
@@ -231,7 +231,7 @@ end)
 
 local Tab4 = Window.Tab("An Infinite Adventure", 6924156005)
 
-local itemautofarm = Tab4.Cheat("Item Autofarm", "like 1 setting for this ig lol!", function(Status)
+local itemautofarm = Tab4.Cheat("Item Autofarm", "gaming autofarm :flushed:", function(Status)
 	workspace.ChildAdded:Connect(function(child)
 		if Status == true then
 			if child:IsA('Tool') then
@@ -289,8 +289,60 @@ itemautofarm.Toggle("Safe Place", function(Status)
 	end
 end)
 
-game:GetService("UserInputService").InputBegan:Connect(function(Input)
-	if Input.KeyCode == Enum.KeyCode[uikeybind] then
+local other = Tab4.Folder("Other","Other things for aia")
+
+other.TextBox("Bring Specific Player [Hitbox]", "FullUsername", function(Text)
+	local plr = Text
+
+	while true do game:GetService('RunService').RenderStepped:wait()
+		if game.Players.LocalPlayer.Character.Humanoid.Health ~= 0 then
+			game.Players[plr].Character:WaitForChild('HumanoidRootPart')
+			game.Players[plr].Character.HumanoidRootPart.Anchored = true
+			game.Players[plr].Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(4.5,0,0)
+		else
+			break
+		end
+	end
+end)
+
+other.Button("Bring All [Hitbox]","Run", function()
+	while true do game:GetService('RunService').RenderStepped:wait()
+		if game.Players.LocalPlayer.Character.Humanoid.Health ~= 0 then
+			for i, dumbasskid in pairs(game.Players:GetPlayers()) do
+				dumbasskid.Character:WaitForChild('HumanoidRootPart')
+				dumbasskid.Character.HumanoidRootPart.Anchored = true
+				dumbasskid.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(4.5,0,0)
+			end
+		else
+			break
+		end
+	end
+end)
+
+other.Button("funny aura thing","Run", function()
+	local color = 1001
+	local color2 = 1009
+	while true do game:GetService('RunService').RenderStepped:wait()
+		if game.Players.LocalPlayer.Character.Humanoid.Health ~= 0 then
+			local args = {
+				[1] = BrickColor.new(color)
+			}
+
+			game:GetService("ReplicatedStorage").Jump:FireServer(unpack(args))
+			local args2 = {
+				[1] = BrickColor.new(color2)
+			}
+
+			game:GetService("ReplicatedStorage").Jump:FireServer(unpack(args2))
+		else
+			break
+		end
+	end
+end)
+
+game:GetService("UserInputService").InputBegan:Connect(function(Input, IsTyping)
+	if IsTyping then return
+	elseif Input.KeyCode == Enum.KeyCode[uikeybind] then
 		Window:Toggle()
 	end
 end)
