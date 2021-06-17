@@ -298,7 +298,7 @@ other.TextBox("Bring Specific Player [Hitbox]", "FullUsername", function(Text)
 		if game.Players.LocalPlayer.Character.Humanoid.Health ~= 0 then
 			game.Players[plr].Character:WaitForChild('HumanoidRootPart')
 			game.Players[plr].Character.HumanoidRootPart.Anchored = true
-			game.Players[plr].Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(3.5,0,0)
+			game.Players[plr].Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(2.5,0,0)
 		else
 			break
 		end
@@ -311,7 +311,7 @@ other.Button("Bring All [Hitbox]","Run", function()
 			for i, dumbasskid in pairs(game.Players:GetPlayers()) do
 				dumbasskid.Character:WaitForChild('HumanoidRootPart')
 				dumbasskid.Character.HumanoidRootPart.Anchored = true
-				dumbasskid.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(3.5,0,0)
+				dumbasskid.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(2.5,0,0)
 			end
 		else
 			break
