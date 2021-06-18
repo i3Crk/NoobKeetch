@@ -28,6 +28,19 @@ local Items = {
 }
 local aianotifs = false
 local safeplace = false
+local aiastaff = {
+	'koolkid77773',
+	'koolman77774',
+	'wikiwb',
+	'crouri',
+	'Lordrann',
+	'doudea2',
+	'doudea3',
+	'Sky7310T',
+	'GodSoup1',
+	'StandUprightStoraage',
+	'HELPME109876'
+}
 
 local Tab1 = Window.Tab("Main", 6026568198)
 local Folder = Tab1.Folder("Script Hubs", "A bunch of script hubs checked every week.")
@@ -339,6 +352,56 @@ other.Button("funny aura thing","Run", function()
 		else
 			break
 		end
+	end
+end)
+
+other.Button("Semi God","Run", function()
+	while true do game:GetService('RunService').RenderStepped:wait()
+		if game.Players.LocalPlayer.Character.Humanoid.Health ~= game.Players.LocalPlayer.Character.Humanoid.MaxHealth then
+			local args = {
+				[1] = CFrame.new(Vector3.new(132.37333679199, 445.72906494141, -3993.478515625), Vector3.new(0.32419288158417, 0.17984354496002, -0.92873877286911)),
+				[2] = math.huge,
+				[3] = "rbxassetid://1202656211",
+				[4] = 1.8,
+				[5] = 0.22
+			}
+
+			game:GetService("ReplicatedStorage").Heal:FireServer(unpack(args))
+		end
+	end
+end)
+
+other.Button("Invis [Beta]","Run", function()
+	local plr = game.Players.LocalPlayer.Character
+	plr.HumanoidRootPart.RootJoint.Part1 = nil
+	plr.Torso.CFrame = plr.Torso.CFrame + Vector3.new(0,1337,0)
+	plr.Torso.Anchored = true
+end)
+
+other.Button("Teleport to admin island thing","Run", function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.Position = Vector3.new(-153.849, 450.549, -24.6526)
+	if not workspace:FindFirstChild('islandplate') then
+		local a = Instance.new('Part', workspace)
+		a.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(0,8,0)
+		a.Anchored = true
+		a.Name = 'islandplate'
+		a.Size = Vector3.new(1000,1.25,1000)
+	end
+end)
+
+--[[
+other.Button("Insta kill","Run", function()
+	
+end)
+]]
+
+other.Switch("Kick on Staff Join [Beta]", function(Status)
+	while Status == true do
+		game.Players.ChildAdded:Connect(function(child)
+			if aiastaff[child] then
+				game.Players.LocalPlayer:Kick('You were automatically kicked. (Staff member joined)')
+			end
+		end)
 	end
 end)
 
