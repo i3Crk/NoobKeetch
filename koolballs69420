@@ -292,22 +292,18 @@ end)
 local other = Tab4.Folder("Other","Other things for aia")
 
 local bringspecific = other.TextBox("Bring Specific Player [Hitbox]", "FullUsername", function(Text)
-	print('ok and? #BS')
-end)
-
-bringspecific.FocusLost:Connect(function()
-	if game.Players[bringspecific.Text] then
-		while true do game:GetService('RunService').RenderStepped:wait()
-			if game.Players.LocalPlayer.Character.Humanoid.Health ~= 0 then
-				game.Players[bringspecific.Text].Character:WaitForChild('HumanoidRootPart')
-				game.Players[bringspecific.Text].Character.HumanoidRootPart.Anchored = true
-				game.Players[bringspecific.Text].Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(2.5,0,0)
-			else
-				break
-			end
+	while true do game:GetService('RunService').RenderStepped:wait()
+		if game.Players.LocalPlayer.Character.Humanoid.Health ~= 0 then
+			repeat
+				wait()
+			until
+				game.Players[Text]
+			game.Players[Text].Character:WaitForChild('HumanoidRootPart')
+			game.Players[Text].Character.HumanoidRootPart.Anchored = true
+			game.Players[Text].Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(2.5,0,0)
+		else
+			break
 		end
-	else
-		print(bringspecific.Text.." player is not found")
 	end
 end)
 
