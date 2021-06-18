@@ -1,6 +1,6 @@
 local Luminosity = loadstring(game:HttpGet("https://raw.githubusercontent.com/iHavoc101/Genesis-Studios/main/UserInterface/Luminosity.lua", true))()
 
-local Window = Luminosity.new("Noobkeetch", "v1.0.5", 4370345701)
+local Window = Luminosity.new("Noobkeetch", "v1.0.6", 4370345701)
 
 --//Variables
 local speed = false
@@ -291,17 +291,27 @@ end)
 
 local other = Tab4.Folder("Other","Other things for aia")
 
-other.TextBox("Bring Specific Player [Hitbox]", "FullUsername", function(Text)
+local bringspecific = other.TextBox("Bring Specific Player [Hitbox]", "FullUsername", function(Text)
 	while true do game:GetService('RunService').RenderStepped:wait()
 		if game.Players.LocalPlayer.Character.Humanoid.Health ~= 0 then
-			game.Players:FindFirstChild(Text).Character:WaitForChild('HumanoidRootPart')
-			game.Players:FindFirstChild(Text).Character.HumanoidRootPart.Anchored = true
-			game.Players:FindFirstChild(Text).Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(2.5,0,0)
+			game.Players[Text].Character:WaitForChild('HumanoidRootPart')
+			game.Players[Text].Character.HumanoidRootPart.Anchored = true
+			game.Players[Text].Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(2.5,0,0)
 		else
 			break
 		end
 	end
 end)
+
+--[[
+bringspecific.FocusLost:Connect(function()
+	if game.Players[bringspecific.Text] then
+		print(bringspecific.Text.." Player is found")
+	else
+		print(bringspecific.Text.." Player is not found")
+	end
+end)
+]]
 
 other.Button("Bring All [Hitbox]","Run", function()
 	while true do game:GetService('RunService').RenderStepped:wait()
