@@ -281,7 +281,7 @@ itemautofarm.Toggle("Safe Place", function(Status)
 			pogwater.Transparency = 0.5
 			pogwater.Color = Color3.new(255,0,0)
 			pogwater.Material = Enum.Material.Neon
-			pogwater.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame*CFrame.new(0,694.20,0)
+			pogwater.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame*CFrame.new(0,1337,0)
 			pogwater.Size = Vector3.new(12,1,12)
 		end
 	elseif Status == false then
@@ -292,13 +292,11 @@ end)
 local other = Tab4.Folder("Other","Other things for aia")
 
 other.TextBox("Bring Specific Player [Hitbox]", "FullUsername", function(Text)
-	local plr = Text
-
 	while true do game:GetService('RunService').RenderStepped:wait()
 		if game.Players.LocalPlayer.Character.Humanoid.Health ~= 0 then
-			game.Players[plr].Character:WaitForChild('HumanoidRootPart')
-			game.Players[plr].Character.HumanoidRootPart.Anchored = true
-			game.Players[plr].Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(2.5,0,0)
+			game.Players:FindFirstChild(Text).Character:WaitForChild('HumanoidRootPart')
+			game.Players:FindFirstChild(Text).Character.HumanoidRootPart.Anchored = true
+			game.Players:FindFirstChild(Text).Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + Vector3.new(2.5,0,0)
 		else
 			break
 		end
