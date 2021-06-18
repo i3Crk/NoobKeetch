@@ -396,7 +396,7 @@ end)
 ]]
 
 other.Switch("Kick on Staff Join [Beta]", function(Status)
-	while Status == true do
+	while Status == true do game:GetService('RunService').RenderStepped:wait()
 		game.Players.ChildAdded:Connect(function(child)
 			if aiastaff[child] then
 				game.Players.LocalPlayer:Kick('You were automatically kicked. (Staff member joined)')
